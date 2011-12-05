@@ -8,7 +8,9 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Test shop',
-
+        'sourceLanguage' => 'ru',
+        'language' => 'ru',
+        'charset'=>'utf-8',
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -20,12 +22,14 @@ return array(
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		/*
+		'polls'=>array(
+                    'defaultController'=>'polls',
+                ),
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
+			'password'=>'111',
 		),
-		*/
+		
 	),
 
 	// application components
@@ -40,11 +44,11 @@ return array(
 			'urlFormat'=>'path',
 			'showScriptName' => false,
 			'urlSuffix'=>'/',
-		/*	'rules'=>array(
+			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),*/
+			),
 		),
 		
 		'db'=>array(

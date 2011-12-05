@@ -4,6 +4,8 @@
 <a href="/<?php if($model['parent_id']): ?>site/index/pid/<?php echo $model['parent_id']; ?>/<?php endif; ?>">Вверх</a>
 <?php endif; ?>
 
+<?php $this->widget('polls.components.PollsWidget', array('registerView'=>false, 'visible'=>true))?>
+
 <?php if ($rows): ?>
 <table>
 	<thead>
