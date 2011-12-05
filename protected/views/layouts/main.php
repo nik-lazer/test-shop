@@ -29,6 +29,7 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'Home', 'url'=>array('/site/index')),
+				array('label'=>'Опросы', 'url'=>array('/polls')),
 			),
 		)); ?>
 	</div><!-- mainmenu -->
