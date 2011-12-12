@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Дек 12 2011 г., 00:24
+-- Время создания: Дек 12 2011 г., 19:51
 -- Версия сервера: 5.5.16
 -- Версия PHP: 5.3.8
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `answer` (
   `value` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `is_answer` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `answer`
@@ -41,7 +41,16 @@ CREATE TABLE IF NOT EXISTS `answer` (
 INSERT INTO `answer` (`id`, `quest_id`, `value`, `is_answer`) VALUES
 (1, 1, 'sdfsd', 0),
 (2, 1, 'sss23', 0),
-(4, 1, 'Слава?', 0);
+(4, 1, 'Слава?', 1),
+(5, 2, '1', 0),
+(6, 2, 'Ответ', 1),
+(7, 2, 'вввв', 0),
+(8, 2, 'вввв1', 0),
+(9, 3, '1231', 0),
+(10, 3, '123112', 0),
+(11, 3, 'Ответ', 1),
+(12, 4, 'Нашшш', 0),
+(13, 4, 'Ответ', 1);
 
 -- --------------------------------------------------------
 
@@ -56,14 +65,17 @@ CREATE TABLE IF NOT EXISTS `question` (
   `complex` tinyint(4) NOT NULL,
   `type` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Дамп данных таблицы `question`
 --
 
 INSERT INTO `question` (`id`, `name`, `description`, `complex`, `type`) VALUES
-(1, 'Привет', '1111', 0, 1);
+(1, 'Вопрос1', '1111', 0, 1),
+(2, 'Вопрос2', '', 0, 1),
+(3, 'Вопрос3', '1231', 0, 1),
+(4, 'Вопрос4', '', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -83,14 +95,14 @@ CREATE TABLE IF NOT EXISTS `task` (
   `count_users` int(11) NOT NULL DEFAULT '0',
   `count_end_users` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
 
 --
 -- Дамп данных таблицы `task`
 --
 
 INSERT INTO `task` (`id`, `time_create`, `type`, `status`, `time_start`, `time_end`, `lot_id`, `proportion`, `count_users`, `count_end_users`) VALUES
-(23, 1323632704, 1, 2, 0, 0, 2, '10/1/2', 0, 0);
+(28, 1323708898, 1, 2, 0, 0, 2, '12/3/4', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -103,16 +115,23 @@ CREATE TABLE IF NOT EXISTS `task_question_relation` (
   `task_id` int(11) NOT NULL,
   `quest_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
 
 --
 -- Дамп данных таблицы `task_question_relation`
 --
 
 INSERT INTO `task_question_relation` (`id`, `task_id`, `quest_id`) VALUES
-(1, 21, 1),
-(2, 22, 1),
-(3, 23, 1);
+(0, 25, 3),
+(6, 26, 3),
+(7, 27, 3),
+(8, 27, 1),
+(9, 27, 2),
+(10, 27, 4),
+(11, 28, 2),
+(12, 28, 3),
+(13, 28, 1),
+(14, 28, 4);
 
 -- --------------------------------------------------------
 
@@ -121,11 +140,14 @@ INSERT INTO `task_question_relation` (`id`, `task_id`, `quest_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `task_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `id_task` int(11) NOT NULL,
-  `votes` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `votes` text COLLATE utf8_unicode_ci NOT NULL,
+  `time_start` int(11) NOT NULL,
+  `time_end` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

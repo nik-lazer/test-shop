@@ -85,4 +85,41 @@ class QuizController extends TaskBaseController
 		));
 	}
         
+        public function actionVotes()
+        {
+            if(Yii::app()->request->isAjaxRequest && !Yii::app()->user->isGuest && isset($_POST['user_answer'],$_POST['task_id'],$_POST['question_id'], $_POST['lot']))
+            {
+
+                $user_answer = $_POST['user_answer'];
+                $task_id = $_POST['task_id'];
+                $quest_id = $_POST['question_id'];
+                $lot = $_POST['lot'];
+                
+                $user = TaskUser::model()->find(
+                            'id_task=:task AND id_user=:user',
+                            array(':task'=>$task_id, ':user'=>1) //user->id!!!        
+                            );
+                $votes = array();
+                
+                if(!empty($user->votes)){
+                    $votes = unserialize(stripslashes($user->votes));
+                }
+                
+                $count = sizeof($votes);
+                $votes[$count]['id'] = $quest_id;
+                $votes[$count]['answer'] = $user_answer;
+                $votes = addslashes(serialize($votes));
+                $user->votes = $votes;
+                $user->save(false);
+                
+                $this->widget('task.components.TaskWidget', array(
+                    'lot'=>$lot,
+                    'user'=>$user,
+                ));
+                
+            }
+            
+        }
+        
+        
 }

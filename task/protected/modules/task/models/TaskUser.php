@@ -7,6 +7,8 @@
  * @property integer $id_user
  * @property integer $id_task
  * @property string $votes
+ * @property integer $time_start
+ * @property integer $time_end
  */
 class TaskUser extends CActiveRecord
 {
@@ -35,7 +37,7 @@ class TaskUser extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_user, id_task, votes', 'required'),
+			array('id_user, id_task, votes, time_start, time_end', 'safe'),
 			array('id_user, id_task', 'numerical', 'integerOnly'=>true),
 			array('votes', 'length', 'max'=>500),
 			// The following rule is used by search().

@@ -81,26 +81,25 @@ class TaskController extends Controller
                             $modelQ1 = Question::model()->findAll($criteria1);
                             $modelQ2 = Question::model()->findAll($criteria2);
                                 
-                            $rel = new TaskQuestionRelation;
                             foreach ($modelQ as $v){
+                                $rel = new TaskQuestionRelation;
                                 $rel->task_id = $model->id;
                                 $rel->quest_id = $v->id;
                                 $rel->save();
-                                $rel->unsetAttributes();
                             }
                             foreach ($modelQ1 as $v){
+                                $rel = new TaskQuestionRelation;
                                 $rel->task_id = $model->id;
                                 $rel->quest_id=$v->id;
                                 $rel->save();                                
-                                $rel->unsetAttributes();
                             }
                             foreach ($modelQ2 as $v){
+                                $rel = new TaskQuestionRelation;
                                 $rel->task_id = $model->id;
                                 $rel->quest_id=$v->id;
                                 $rel->save();
-                                $rel->unsetAttributes();
                             }                     
-                            $this->redirect(array('index'));
+                            //$this->redirect(array('index'));
                         }        
                 }
                 else {

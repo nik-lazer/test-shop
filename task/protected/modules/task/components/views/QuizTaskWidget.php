@@ -4,7 +4,12 @@
             <? echo $message;?>
         </div>
     <? else: ?>
-        <? echo CHtml::beginForm();?>
+        <? echo CHtml::beginForm(
+                '/task/quiz/votes',
+                'POST',
+                array(
+                    'name'=>'task-form'   
+                ));?>
         <div id="question">
             <? echo $quest->name; ?>
         </div>
@@ -13,17 +18,23 @@
            <? echo Chtml::radioButton('user_answer',false,array('value'=>$v->id)).' '.$v->value; ?><br />
         <? endforeach; ?>
         <br />
-        <? echo CHtml::submitButton('Далее', array('disabled'=>1, 'id'=>'btnTask'))?>
+        <? echo CHtml::hiddenField('task_id', $model->id);?>
+        <? echo CHtml::hiddenField('lot', $lot);?>
+        <? echo CHtml::hiddenField('question_id', $quest->id);?>
+        <? echo CHtml::ajaxSubmitButton(
+                'Далее',
+                Yii::app()->createUrl('/task/quiz/votes'),
+                array(
+                    'type'=>'POST',
+                    'update'=>'#task',
+                ),
+                array(
+                    'type'=>'submit',
+                    'disabled'=>1,
+                    'id'=>'btnTask',
+                )
+            );?>
         <? echo CHtml::endForm();?>
     <? endif; ?>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        
-        $('input[name="user_answer"]').change(function(){
-           $('#btnTask').attr('disabled', false);
-        });
-        
-    })
-</script>    
+   
