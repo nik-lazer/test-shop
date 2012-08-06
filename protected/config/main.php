@@ -85,6 +85,18 @@ return array(
 				*/
 			),
 		),
+		'search' => array(
+            'class' => 'application.components.DGSphinxSearch',
+            'server' => '127.0.0.1',
+            'port' => 9312,
+            'maxQueryTime' => 3000,
+            'enableProfiling'=>0,
+            'enableResultTrace'=>0,
+            'fieldWeights' => array(
+                'name' => 10000,
+                'keywords' => 100,
+            ),
+        ),
 	),
 
 	// application-level parameters that can be accessed
