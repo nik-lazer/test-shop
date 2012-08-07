@@ -347,7 +347,7 @@ class DGSphinxSearch extends CApplicationComponent
         $this->client->resetGroupBy();
         $this->client->setArrayResult(false);
         $this->client->setMatchMode($this->matchMode);
-        $this->client->setRankingMode($this->rankMode);
+        //$this->client->setRankingMode($this->rankMode);
         $this->client->setSortMode(SPH_SORT_RELEVANCE, '@relevance DESC');
         $this->client->setLimits(0, 1000000, 2000);
         if (!empty($this->fieldWeights)) {
