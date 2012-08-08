@@ -9,22 +9,6 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		$pid = DataUtils::checkIntVal(Yii::app()->request->getQuery('pid',0));
-		$searchCriteria = new stdClass();
-        
-		$pages = new CPagination();
-        //$pages->pageSize = 100;
-        //$pages->setCurrentPage(0);
-        $searchCriteria->select = '*';
-        $searchCriteria->filters = array('code' => '00001');
-        //$searchCriteria->query = '@name '.$query.'*';
-        //$searchCriteria->paginator = $pages;
-        //$searchCriteria->groupby = $groupby;
-        //$searchCriteria->orders = array('name' => 'ASC');
-        $searchCriteria->from = 'shop';
-        $resIterator = Yii::App()->search->search($searchCriteria); // interator result
-        /* OR */
-        $resArray = Yii::App()->search->searchRaw($searchCriteria); // array result
-
         $rubricModel = new RubricModel();
 		$model = $rubricModel->getById($pid);
 		$childCount = $rubricModel->getChildCount($pid);
