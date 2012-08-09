@@ -24,9 +24,9 @@ class SearchController extends Controller {
     public function actionTest() {
         $list = Yii::App()->search->select('*')->
             from(‘facet_index’)->
-            where('Белизна')->
-            //orderby(array('name'=>'asc'))->
-            filters(array('rubric_id'=>4))->
+            //where('Белизна')->
+            orderby(array('name desc'))->
+            //filters(array('rubric_id'=>4))->
             search();
         print_r($list);
     }

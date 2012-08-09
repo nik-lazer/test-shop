@@ -292,14 +292,15 @@ class DGSphinxSearch extends CApplicationComponent
 
     /**
      * @brief set matches sorting, SQL-like syntax - 'order_by expression'
-     * @param DGSort $orders
+     * @param array $orders
      * @return $this chain
      */
-    public function orderby(DGSort $orders = null)
+    public function orderby($orders = null)
     {
         $this->criteria->orders = $orders;
-        if ($orders && $orders->getOrderBy()) {
-            $this->client->SetSortMode(SPH_SORT_EXTENDED, $orders->getOrderBy());
+        if ($orders && is_array($orders)) {
+            $orderString = implode(',', $orders);
+            $this->client->SetSortMode(SPH_SORT_EXTENDED, $orderString);
         }
         return $this;
     }
