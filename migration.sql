@@ -49,7 +49,9 @@ insert into goods2rubric(id, code) values (4,'00001');
 insert into goods2rubric(id, code) values (4,'00002');
 insert into goods2rubric(id, code) values (4,'00003');
 
-create or replace view shop_view as 
+create or replace view shop_view
+(id, rname, name, unit, code, gname)
+as 
 select f.id, r.name as rname, f.name, f.unit, g.code, g.name as gname
 from facets f
 inner join facets2goods f2g on  f2g.facet_id=f.id
