@@ -1,6 +1,17 @@
 <?php
 
 class RubricModel extends CModel {
+    public $id;
+    public $parent_id;
+    public $name;
+    
+    public function rules() {
+		return array(
+			array('id,parent_id', 'numerical'),
+			array('id,name','required'),
+			array('name', 'length', 'max'=>512),
+		);
+	}
 	
 	public function tableName() {
 		return 'rubric';
@@ -57,5 +68,26 @@ class RubricModel extends CModel {
 		} else if (!count($ret)) 
 			$ret['Главная'] = '/';
 		return $ret;
+	}
+	
+	public function treeData() {
+	    $childCount = $this->getChildCount($this->id);
+	    $ret = array(
+	        'id'=>$this->id,
+	        'text'=>$this->name,
+	    	'expanded' => true,
+	        'hasChildren'=>($childCount?true:false),
+	    );
+	    if ($childCount) {
+	        $childs = $this->getByParent($this->id);
+	        $childList = array();
+	        foreach ($childs as $child) {
+	            $model = new RubricModel();
+	            $model->attributes = $child;
+	            $childList[] = $model->treeData();
+	        }
+	        $ret['children'] = $childList;
+	    }
+	    return $ret;
 	}
 }
