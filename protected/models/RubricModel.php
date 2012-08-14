@@ -70,23 +70,25 @@ class RubricModel extends CModel {
 		return $ret;
 	}
 	
-	public function treeData() {
+	public function treeData($isRecursive=true) {
 	    $childCount = $this->getChildCount($this->id);
 	    $ret = array(
 	        'id'=>$this->id,
 	        'text'=>$this->name,
-	    	'expanded' => true,
+	    	//'expanded' => true,
 	        'hasChildren'=>($childCount?true:false),
 	    );
-	    if ($childCount) {
-	        $childs = $this->getByParent($this->id);
-	        $childList = array();
-	        foreach ($childs as $child) {
-	            $model = new RubricModel();
-	            $model->attributes = $child;
-	            $childList[] = $model->treeData();
-	        }
-	        $ret['children'] = $childList;
+	    if ($isRecursive) {
+    	    if ($childCount) {
+    	        $childs = $this->getByParent($this->id);
+    	        $childList = array();
+    	        foreach ($childs as $child) {
+    	            $model = new RubricModel();
+    	            $model->attributes = $child;
+    	            $childList[] = $model->treeData();
+    	        }
+    	        $ret['children'] = $childList;
+    	    }
 	    }
 	    return $ret;
 	}
